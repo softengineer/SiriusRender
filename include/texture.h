@@ -17,7 +17,7 @@ class Texture
         // Original width and height
         int w, h;
 
-        // Current coordinates, width and height
+        // Current coordinates, width and height 
         SDL_Rect rect;
 
     public :
@@ -26,7 +26,7 @@ class Texture
 
         void imageRender(); 
         void imageRenderCrop(SDL_Rect *crop, SDL_Point *pos);
-        SDL_Surface*  imageLoad(SDL_Surface * surface, std::string path);
+        SDL_Texture* imageLoad( std::string path );
 
         Texture(SDL_Renderer *renderer) {
             this->renderer = renderer;
