@@ -5,17 +5,24 @@
 
 class GameObjectBase
 {
+friend class Engine;
 private:
     SDL_Renderer *renderer;
     void render();
+    bool started;
+    
 public:
+    //game object position
+    Vector2 transform;
+
     GameObjectBase();
     ~GameObjectBase();
 
    
-// protected:
-//     void start () = 0;
-//     void update () = 0;
+protected:
+    virtual void start ();
+    virtual void update ();
+
 };
 
 

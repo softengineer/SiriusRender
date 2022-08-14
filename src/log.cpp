@@ -6,6 +6,7 @@ void  Log::debug(std::string msg)
     std::cout <<"DEBUG :" << msg << std::endl;
 }
 
+
 void  Log::info (std::string  msg)
 {
     std::cout <<"INFO :" << msg << std::endl;

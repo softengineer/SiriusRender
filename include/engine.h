@@ -14,7 +14,9 @@
 
 class Engine
 {
+
 private:
+    bool quit;
     SDL_Window *window;
     SDL_Renderer *renderer;
     Engine();

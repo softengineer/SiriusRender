@@ -2,27 +2,8 @@
 
 
 
-bool Texture::imageLoad(const char *file)
+SDL_Texture* Texture::imageLoad( std::string path ) 
 {
-    // Load image
-    texture = IMG_LoadTexture(renderer, file);
-    if(!texture)
-    {
-        printf("Unable to load image '%s'!\n"
-               "SDL_image Error: %s", file, IMG_GetError());
-        return false;
-    }
-
-    // Get dimensions
-    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-
-    rect.w = w;
-    rect.h = h;
-
-    return true;
-}
-
-SDL_Texture* Texture::imageLoad( std::string path ) {
     //The final texture
     SDL_Texture* newTexture = NULL;
 
@@ -38,6 +19,7 @@ SDL_Texture* Texture::imageLoad( std::string path ) {
     if( newTexture == NULL )
     {
         printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+        return NULL;
     }
 
     //Get rid of old loaded surface
@@ -70,4 +52,25 @@ void Texture::imageRenderCrop(SDL_Rect *crop, SDL_Point *pos)
     }
 
     SDL_RenderCopy(renderer, texture, crop, &rect);
+}
+
+
+bool Texture::load_png(const char *file)
+{
+    // Load image
+    texture = IMG_LoadTexture(renderer, file);
+    if(!texture)
+    {
+        printf("Unable to load image '%s'!\n"
+               "SDL_image Error: %s", file, IMG_GetError());
+        return false;
+    }
+
+    // Get dimensions
+    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+
+    rect.w = w;
+    rect.h = h;
+
+    return true;
 }

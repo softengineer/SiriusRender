@@ -2,6 +2,7 @@
 #define TEXTURE_H
 
 #include "SDLRef.h"
+#include "log.h"
 #include <stdio.h>
 #include <string>
 
@@ -31,6 +32,9 @@ class Texture
         Texture(SDL_Renderer *renderer) {
             this->renderer = renderer;
         };
+
+    private:
+        bool load_png(const char * file);
 };
 
 

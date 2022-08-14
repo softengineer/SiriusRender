@@ -1,5 +1,7 @@
 #include <engine.h>
- 
+
+
+
  
 Engine::Engine(/* args */) : window(NULL), renderer(NULL)
 {
@@ -57,21 +59,28 @@ int Engine::init() {
 }
 
 int Engine::run() {
-     std::cout<< "run it this is ";
-    // Start animation
-    //Animation_start(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-    auto screenSurface = SDL_GetWindowSurface( window );
+    //Event handler
+    SDL_Event e;
 
-    std::cout<< " this is " << screenSurface ;
+    while( !quit )
+    {
+        //Handle SDL events on queue
+        while( SDL_PollEvent( &e ) != 0 )
+        {
+            //User requests quit
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
+        }
 
-    //Fill the surface white
-    SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x7F, 0xFF, 0xFF ) );
-    
-    // //Update the surface
-    SDL_UpdateWindowSurface( window );
-
-    // //Wait two seconds
-    SDL_Delay( 2000 );
+        for (GameObjectBase * o : renderObjects) 
+        {
+            o->render();
+        }
+        //Update screen
+        SDL_RenderPresent( renderer );
+    }
    
     return 0;
 }
